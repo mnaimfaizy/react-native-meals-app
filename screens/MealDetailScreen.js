@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 
 import IconButton from "../components/IconButton";
@@ -6,14 +6,30 @@ import List from "../components/MealDetail/List";
 import Subtitle from "../components/MealDetail/Subtitle";
 import MealDetails from "../components/MealDetails";
 import { MEALS } from "../data/dummy-data";
+import { FavoritesContext } from "../store/context/favorites-context";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../store/redux/favorities";
 
 function MealDetailScreen({ route, navigation }) {
+  const favoriteMealCtx = useContext(FavoritesContext);
+  // const favoriteMealIds = useSelector((state) => state.favoriteMeals.ids)
+  // const dispatch = useDispatch()
+
   const mealId = route.params.mealId;
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
-  function headerButtonPressHandler() {
-    console.log("Pressed!");
+  const mealIsFavorite = favoriteMealCtx.ids.includes(mealId);
+  // const mealIsFavorite = favoriteMealIds.includes(mealId)
+
+  function changeFavoriteStatusHandler() {
+    if (mealIsFavorite) {
+      favoriteMealCtx.removeFavorite(mealId);
+      // dispatch(removeFavorite({ id: mealId}));
+    } else {
+      favoriteMealCtx.addFavorite(mealId);
+      // dispatch(addFavorite({ id: mealId}));
+    }
   }
 
   useLayoutEffect(() => {
@@ -21,14 +37,14 @@ function MealDetailScreen({ route, navigation }) {
       headerRight: () => {
         return (
           <IconButton
-            icon="star"
+            icon={mealIsFavorite ? "star" : "star-outline"}
             color="white"
-            onPress={headerButtonPressHandler}
+            onPress={changeFavoriteStatusHandler}
           />
         );
       },
     });
-  }, [navigation, headerButtonPressHandler]);
+  }, [navigation, changeFavoriteStatusHandler]);
 
   return (
     <ScrollView style={styles.rootContainer}>

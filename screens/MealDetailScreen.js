@@ -7,8 +7,8 @@ import Subtitle from "../components/MealDetail/Subtitle";
 import MealDetails from "../components/MealDetails";
 import { MEALS } from "../data/dummy-data";
 import { FavoritesContext } from "../store/context/favorites-context";
-import { useDispatch, useSelector } from "react-redux";
-import { addFavorite, removeFavorite } from "../store/redux/favorities";
+// import { useDispatch, useSelector } from "react-redux";
+// import { addFavorite, removeFavorite } from "../store/redux/favorities";
 
 function MealDetailScreen({ route, navigation }) {
   const favoriteMealCtx = useContext(FavoritesContext);

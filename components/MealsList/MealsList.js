@@ -1,4 +1,4 @@
-import { View, FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 
 import MealItem from "./MealItem";
 
@@ -23,6 +23,8 @@ function MealsList({ items }) {
         data={items}
         keyExtractor={(item) => item.id}
         renderItem={renderMealItem}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.listContent}
       />
     </View>
   );
@@ -31,7 +33,10 @@ function MealsList({ items }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+  },
+  listContent: {
+    paddingBottom: 24,
+    paddingTop: 8,
   },
 });
 

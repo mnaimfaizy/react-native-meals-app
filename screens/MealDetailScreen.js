@@ -1,5 +1,5 @@
 import { useContext, useLayoutEffect } from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import IconButton from "../components/IconButton";
 import List from "../components/MealDetail/List";
@@ -48,14 +48,19 @@ function MealDetailScreen({ route, navigation }) {
 
   return (
     <ScrollView style={styles.rootContainer}>
-      <Image style={styles.image} source={{ uri: selectedMeal.imageUrl }} />
-      <Text style={styles.title}>{selectedMeal.title}</Text>
-      <MealDetails
-        duration={selectedMeal.duration}
-        complexity={selectedMeal.complexity}
-        affordability={selectedMeal.affordability}
-        textStyle={styles.detailText}
-      />
+      <View style={styles.imageContainer}>
+        <Image style={styles.image} source={{ uri: selectedMeal.imageUrl }} />
+        <View style={styles.imageGradient} />
+      </View>
+      <View style={styles.infoContainer}>
+        <Text style={styles.title}>{selectedMeal.title}</Text>
+        <MealDetails
+          duration={selectedMeal.duration}
+          complexity={selectedMeal.complexity}
+          affordability={selectedMeal.affordability}
+          textStyle={styles.detailText}
+        />
+      </View>
       <View style={styles.listOuterContainer}>
         <View style={styles.listContainer}>
           <Subtitle>Ingredients</Subtitle>
@@ -74,24 +79,53 @@ const styles = StyleSheet.create({
   rootContainer: {
     marginBottom: 32,
   },
-  image: {
+  imageContainer: {
+    position: "relative",
     width: "100%",
     height: 350,
   },
+  image: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+  },
+  imageGradient: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 100,
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+  },
+  infoContainer: {
+    backgroundColor: "rgba(53, 20, 1, 0.9)",
+    padding: 16,
+    marginHorizontal: 16,
+    marginTop: -40,
+    borderRadius: 20,
+    elevation: 8,
+    shadowColor: "black",
+    shadowOpacity: 0.4,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 12,
+  },
   title: {
     fontWeight: "bold",
-    fontSize: 24,
-    margin: 8,
+    fontSize: 26,
+    marginBottom: 12,
     textAlign: "center",
     color: "white",
+    letterSpacing: 0.5,
   },
   detailText: {
     color: "white",
   },
   listOuterContainer: {
     alignItems: "center",
+    marginTop: 24,
   },
   listContainer: {
-    width: "80%",
+    width: "90%",
+    marginBottom: 20,
   },
 });

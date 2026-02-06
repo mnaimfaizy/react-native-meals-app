@@ -1,5 +1,6 @@
-import { FlatList } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import CategoryGridTile from "../components/CategoryGridTile";
+import MenuHeader from "../components/MenuHeader";
 
 import { CATEGORIES } from "../data/dummy-data";
 
@@ -26,8 +27,17 @@ function CategoriesScreen({ navigation }) {
       keyExtractor={(item) => item.id}
       renderItem={renderCategoryItem}
       numColumns={2}
+      showsVerticalScrollIndicator={false}
+      ListHeaderComponent={MenuHeader}
+      contentContainerStyle={styles.listContent}
     />
   );
 }
 
 export default CategoriesScreen;
+
+const styles = StyleSheet.create({
+  listContent: {
+    paddingBottom: 24,
+  },
+});

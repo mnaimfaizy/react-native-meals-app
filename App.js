@@ -1,17 +1,18 @@
 import "react-native-gesture-handler";
 
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Button } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Ionicons } from "@expo/vector-icons";
-import { Provider } from "react-redux";
+import { StatusBar } from "expo-status-bar";
+import { useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
 
+import SplashScreen from "./components/SplashScreen";
 import CategoriesScreen from "./screens/CategoriesScreen";
-import MealsOverviewScreen from "./screens/MealsOverviewScreen";
-import MealDetailScreen from "./screens/MealDetailScreen";
 import FavoritesScreen from "./screens/FavoritesScreen";
+import MealDetailScreen from "./screens/MealDetailScreen";
+import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import FavoritesContextProvider from "./store/context/favorites-context";
 
 // import { store } from './store/redux/store'
@@ -30,15 +31,17 @@ function DrawerNavigator() {
         drawerInactiveTintColor: "white",
         drawerActiveTintColor: "#351401",
         drawerActiveBackgroundColor: "#e4baa1",
+        drawerItemStyle: { borderRadius: 12, marginVertical: 4 },
+        drawerLabelStyle: { fontSize: 16, fontWeight: "600", marginLeft: -16 },
       }}
     >
       <Drawer.Screen
         name="Categories"
         component={CategoriesScreen}
         options={{
-          title: "All Categories",
+          title: "Delicious - Menu",
           drawerIcon: ({ color, size }) => (
-            <Ionicons name="list" color={color} size={size} />
+            <Ionicons name="restaurant" color={color} size={size} />
           ),
         }}
       />
@@ -56,6 +59,21 @@ function DrawerNavigator() {
 }
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate app initialization
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500); // Show splash for 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <SplashScreen />;
+  }
+
   return (
     <>
       <StatusBar style="light" />

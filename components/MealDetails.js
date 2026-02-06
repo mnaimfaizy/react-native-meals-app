@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, Text, View } from "react-native";
 
 function MealDetails({
   duration,
@@ -9,13 +10,34 @@ function MealDetails({
 }) {
   return (
     <View style={[styles.details, style]}>
-      <Text style={[styles.detailItem, textStyle]}>{duration}m</Text>
-      <Text style={[styles.detailItem, textStyle]}>
-        {complexity.toUpperCase()}
-      </Text>
-      <Text style={[styles.detailItem, textStyle]}>
-        {affordability.toUpperCase()}
-      </Text>
+      <View style={styles.detailItem}>
+        <Ionicons 
+          name="time-outline" 
+          size={18} 
+          color={textStyle?.color || "#6b5b51"} 
+        />
+        <Text style={[styles.detailText, textStyle]}>{duration}m</Text>
+      </View>
+      <View style={styles.detailItem}>
+        <Ionicons 
+          name="bar-chart-outline" 
+          size={18} 
+          color={textStyle?.color || "#6b5b51"} 
+        />
+        <Text style={[styles.detailText, textStyle]}>
+          {complexity.toUpperCase()}
+        </Text>
+      </View>
+      <View style={styles.detailItem}>
+        <Ionicons 
+          name="wallet-outline" 
+          size={18} 
+          color={textStyle?.color || "#6b5b51"} 
+        />
+        <Text style={[styles.detailText, textStyle]}>
+          {affordability.toUpperCase()}
+        </Text>
+      </View>
     </View>
   );
 }
@@ -27,10 +49,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    padding: 8,
+    padding: 12,
+    gap: 16,
   },
   detailItem: {
-    marginHorizontal: 4,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    backgroundColor: "rgba(227, 180, 151, 0.2)",
+    borderRadius: 20,
+  },
+  detailText: {
     fontSize: 12,
+    fontWeight: "600",
+    color: "#6b5b51",
+    letterSpacing: 0.5,
   },
 });

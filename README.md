@@ -4,6 +4,8 @@ A cross-platform mobile application built with React Native and Expo that allows
 
 ## 📱 Features
 
+- **Elegant Splash Screen**: Beautiful animated welcome screen with restaurant branding that displays on app launch
+- **Restaurant-Style Menu**: Browse meals through an upscale restaurant menu interface with decorative elements
 - **Browse Meal Categories**: Explore 10 different meal categories including Italian, Asian, French, German, and more
 - **View Meal Details**: Access comprehensive meal information including:
   - Ingredients list
@@ -15,6 +17,24 @@ A cross-platform mobile application built with React Native and Expo that allows
 - **Favorites Management**: Mark meals as favorites and access them quickly from a dedicated favorites screen
 - **Drawer Navigation**: Easy navigation between categories and favorites using an intuitive drawer menu
 - **Custom Themed UI**: Consistent color scheme with a warm, food-themed palette
+
+## 📸 Screenshots
+
+<div align="center">
+
+### Categories Menu
+![Categories Screen](screenshots/categories-screen.png)
+
+### Meal Categories
+![Sub Menu Screen](screenshots/sub-menu-screen.png)
+
+### Meal Details
+![About the Meal](screenshots/about-the-meal.png)
+
+### Favorites
+![Favorites Screen](screenshots/favorites-screen.png)
+
+</div>
 
 ## 🛠️ Tech Stack
 
@@ -55,6 +75,8 @@ react-native-meals-app/
 │   ├── CategoryGridTile.js    # Category card component
 │   ├── IconButton.js          # Custom icon button
 │   ├── MealDetails.js         # Meal metadata display
+│   ├── MenuHeader.js          # Restaurant-style menu header
+│   ├── SplashScreen.js        # Animated splash screen component
 │   ├── MealDetail/
 │   │   ├── List.js           # Ingredients/steps list
 │   │   └── Subtitle.js       # Section subtitles
@@ -71,6 +93,11 @@ react-native-meals-app/
 │   ├── MealsOverviewScreen.js # Meals list for a category
 │   ├── MealDetailScreen.js   # Single meal details
 │   └── FavoritesScreen.js    # User's favorite meals
+├── screenshots/               # App screenshots for documentation
+│   ├── about-the-meal.png
+│   ├── categories-screen.png
+│   ├── favorites-screen.png
+│   └── sub-menu-screen.png
 └── store/                     # State management
     ├── context/
     │   └── favorites-context.js # Context API for favorites
@@ -148,10 +175,11 @@ Stack Navigator (Root)
 
 ### Screen Flow
 
-1. **Categories Screen**: Entry point displaying all meal categories in a 2-column grid
-2. **Meals Overview Screen**: Shows all meals belonging to a selected category
-3. **Meal Detail Screen**: Displays complete recipe details with ingredients, steps, and metadata
-4. **Favorites Screen**: Accessible from drawer, shows all favorited meals
+1. **Splash Screen**: Animated welcome screen displayed on app launch (2.5 seconds)
+2. **Categories Screen**: Restaurant-style menu displaying all meal categories in a 2-column grid with decorative header
+3. **Meals Overview Screen**: Shows all meals belonging to a selected category
+4. **Meal Detail Screen**: Displays complete recipe details with ingredients, steps, and metadata
+5. **Favorites Screen**: Accessible from drawer, shows all favorited meals
 
 ### State Management
 
@@ -219,11 +247,17 @@ Standard Expo babel preset is used for React Native.
 
 ## 📚 Key Components
 
+### SplashScreen
+Animated welcome screen that displays on app launch with fade-in and spring animations, featuring the restaurant branding and tagline.
+
+### MenuHeader
+Restaurant-style header component with decorative elements, welcome message, and menu title that displays at the top of the categories screen.
+
 ### CategoryGridTile
-Displays individual category cards in a pressable tile format with custom colors.
+Displays individual category cards in a pressable tile format with custom colors, gradients, and enhanced shadows.
 
 ### MealItem
-Shows meal cards with image, title, duration, complexity, and affordability.
+Shows meal cards with image, title, duration, complexity, and affordability with modern card design and overlay effects.
 
 ### MealsList
 Container component that renders a FlatList of MealItem components.
@@ -232,7 +266,7 @@ Container component that renders a FlatList of MealItem components.
 Reusable button component with Ionicons integration for actions like favoriting.
 
 ### MealDetails
-Displays meal metadata (duration, complexity, affordability) in a formatted layout.
+Displays meal metadata (duration, complexity, affordability) in a formatted layout with contextual icons and badge styling.
 
 ## 🔄 Future Enhancements
 
